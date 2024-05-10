@@ -49,7 +49,7 @@ button:hover {
 }
 
 .result-section {
-    flex-basis: 48%;
+    flex-basis: 48%; /* Adjust the width for responsiveness */
     background-color: #e9ecef;
     padding: 15px;
     margin-bottom: 20px;
@@ -71,32 +71,4 @@ button:hover {
         top: 0;
         width: 100%;
     }
-    .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-
 }
