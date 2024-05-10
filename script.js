@@ -5,13 +5,19 @@ function calculate() {
     const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
     const annualIncome = parseFloat(document.getElementById('annualIncome').value);
 
+    if (isNaN(amountFinanced) || isNaN(apr) || isNaN(termYears) || isNaN(rateOfReturn) || isNaN(annualIncome)) {
+        alert("Please fill all fields with valid numbers.");
+        return;
+    }
+
     const monthlyInterestRate = apr / 100 / 12;
     const totalPayments = termYears * 12;
+    const monthlyPayment = amount
     const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
     const totalCostOfFinance = monthlyPayment * totalPayments;
+    const totalInterestPaid = totalCostOfFinance - amountFinanced;
 
     let taxRate;
-    if (annualIncome <=
     if (annualIncome <= 9875) {
         taxRate = 0.10;
     } else if (annualIncome <= 40125) {
@@ -28,7 +34,6 @@ function calculate() {
         taxRate = 0.37;
     }
 
-    const totalInterestPaid = totalCostOfFinance - amountFinanced;
     const taxSavings = totalInterestPaid * taxRate;
 
     let financeOutput = `<h2>Finance Details</h2>`;
@@ -39,7 +44,7 @@ function calculate() {
     let currentInvestment = amountFinanced;
     let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
     for (let year = 1; year <= termYears; year++) {
-        currentInvestment *= (1 + rateOfReturn / 100);
+        currentInvestment *= 1 + rateOfReturn / 100;
         investmentOutput += `<tr><td>${year}</td><td>$${currentInvestment.toLocaleString('en-US', {maximumFractionDigits: 2})}</td></tr>`;
     }
     investmentOutput += `</table>`;
