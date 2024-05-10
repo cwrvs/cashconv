@@ -9,17 +9,25 @@
 <body>
 <div class="container">
     <div class="inputs">
-        <h1>Should You Pay Cash or Finance Your RV Purchase?</h1>
-        <input type="number" id="amountFinanced" placeholder="Amount Financed ($)">
-        <input type="number" id="apr" placeholder="APR (%)">
-        <input type="number" id="termYears" placeholder="Term (Years)">
-        <input type="number" id="rateOfReturn" placeholder="Rate of Return (%)">
-        <input type="number" id="incomeTaxRate" placeholder="Income Tax Rate (%)">
+        <h1>RV Purchase Options</h1>
+        <label for="amountFinanced">Amount Financed ($):</label>
+        <input type="number" id="amountFinanced" placeholder="Enter amount">
+
+        <label for="apr">APR (%):</label>
+        <input type="number" id="apr" placeholder="Enter APR">
+
+        <label for="termYears">Term (Years):</label>
+        <input type="number" id="termYears" placeholder="Enter term">
+
+        <label for="rateOfReturn">Rate of Return (%):</label>
+        <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
+
         <button onclick="calculate()">Calculate</button>
-        <p>When you finance an RV, you pay <strong>SIMPLE INTEREST</strong> - you only pay interest on the outstanding principal balance.</p>
-        <p>When you invest money, you earn <strong>COMPOUND INTEREST</strong> - you not only earn interest on the investment balance, but also on the interest that you earned in previous years.</p>
     </div>
-    <div id="output">Results will be displayed here.</div>
+    <div class="results">
+        <div id="financeDetails"></div>
+        <div id="investmentResults"></div>
+    </div>
 </div>
 <script src="script.js"></script>
 </body>
