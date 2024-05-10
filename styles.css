@@ -9,18 +9,13 @@ body {
     max-width: 1200px;
     margin: auto;
     background-color: #ffffff;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     padding: 20px;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
 }
 
-.inputs, .
 .inputs, .results {
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 20px;
 }
@@ -41,12 +36,10 @@ button {
     background-color: #007BFF;
     color: white;
     cursor: pointer;
-    border-color: #007BFF;
 }
 
 button:hover {
     background-color: #0056b3;
-    border-color: #0056b3;
 }
 
 .results {
@@ -55,53 +48,27 @@ button:hover {
     justify-content: space-between;
 }
 
-.results > div {
-    flex-basis: 48%; /* Adjust the width for responsiveness */
+.result-section {
+    flex-basis: 48%;
     background-color: #e9ecef;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-h2 {
-    color: #333;
-    font-size: 1.25rem;
-    margin-top: 0;
-}
-
-table {
-    width: 100%;
-    margin-top: 10px;
-    border-collapse: collapse;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f8f9fa;
-}
-
-.highlight {
-    background-color: #d6e9c6; /* Light green background for positive outcomes */
-}
 @media print {
-    body {
-        font-size: 12pt;
+    body * {
+        visibility: hidden;
     }
-    .inputs, button, .highlight {
-        display: none; /* Hide interactive elements */
+
+    .results, .results * {
+        visibility: visible;
     }
+
     .results {
+        position: absolute;
+        left: 0;
+        top: 0;
         width: 100%;
-        margin: 0;
-    }
-    .results > div {
-        width: 100%;
-        box-shadow: none;
     }
 }
