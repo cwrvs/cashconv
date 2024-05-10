@@ -1,8 +1,16 @@
-<style>
 body {
     font-family: Arial, sans-serif;
 }
-label, input {
-    margin: 10px;
+label, input, button {
+    display: block;
+    margin: 10px 0;
 }
-</style>
+input, button {
+    padding: 8px;
+}
+#results {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+}
