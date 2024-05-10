@@ -1,3 +1,4 @@
+Absolutely, here's the updated HTML incorporating the JavaScript code with the checkbox to factor in tax savings:
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +23,11 @@
             <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
             <label for="annualIncome">Annual Income ($):</label>
             <input type="number" id="annualIncome" placeholder="Enter annual income">
-            <button onclick="calculate()">Calculate</button>
+            <div>
+              <label for="factorTaxCheckbox">Factor in Tax Savings?</label>
+              <input type="checkbox" id="factorTaxCheckbox" checked>
+            </div>
+            <button onclick="calculateLoanComparison()">Calculate</button>
             <button onclick="printResults()">Print Results</button>
         </div>
         <div class="results">
@@ -41,3 +46,9 @@
 </body>
 
 </html>
+
+The key changes are:
+ * Added a checkbox element with the label "Factor in Tax Savings?" and an id of "factorTaxCheckbox".
+ * Updated the onclick attribute of the "Calculate" button to call the calculateLoanComparison function instead of calculate.
+Remember to update your script.js file with the calculateLoanComparison function and the calculateTaxRate function incorporating marginal tax rates as discussed previously.
+ * https://medium.com/samsung-internet-dev/making-an-ar-game-with-aframe-529e03ae90cb
