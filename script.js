@@ -5,51 +5,39 @@ function calculate() {
     const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
     const annualIncome = parseFloat(document.getElementById('annualIncome').value);
 
-    // Calculate monthly payment and total payment over the term
     const monthlyInterestRate = apr / 100 / 12;
     const totalPayments = termYears * 12;
     const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
     const totalCostOfFinance = monthlyPayment * totalPayments;
 
-    // Finance details output
     let financeOutput = `<h2>Finance Details</h2>`;
-    financeOutput += `<p>Monthly Payment: $${monthlyPayment.toFixed(2)}</p>`;
-    financeOutput += `<p>Total Payment Over ${termYears} Years: $${totalCostOfFinance.toFixed(2)}</p>`;
-    financeOutput += `<p>Total Interest Paid: $${(totalCostOfFinance - amountFinanced).toFixed(2)}</p>`;
+    financeOutput += `<p>Monthly Payment: $${monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
+    financeOutput += `<p>Total Payment Over ${termYears} Years: $${totalCostOfFinance.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
+    financeOutput += `<p>Total Interest Paid: $${(totalCostOfFinance - amountFinanced).toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
 
-    // Calculate annual investment growth
     let currentInvestment = amountFinanced;
     let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
     for (let year = 1; year <= termYears; year++) {
         currentInvestment *= (1 + rateOfReturn / 100);
-        investmentOutput += `<tr><td>${year}</td><td>$${currentInvestment.toFixed(2)}</td></tr>`;
+        investmentOutput += `<tr><td>${year}</td><td>$${currentInvestment.toLocaleString('en-US', {maximumFractionDigits: 2})}</td></tr>`;
     }
     investmentOutput += `</table>`;
 
-    // Calculate tax savings from interest paid
     const totalInterestPaid = totalCostOfFinance - amountFinanced;
-    const taxRate = (annualIncome > 100000) ? 0.32 : 0.24; // Adjust based on real tax brackets
+    const taxRate = (annualIncome > 100000) ? 0.32 : 0.24;
     const taxSavings = totalInterestPaid * taxRate;
     let taxOutput = `<h2>Tax Benefits</h2>`;
-    taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toFixed(2)}</p>`;
+    taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
 
-    // Calculate net benefits of financing vs. paying cash
-    const netInvestmentValue = currentInvestment - amountFinanced;  // Growth minus original amount
-    const netCostOfFinancing = totalCostOfFinance - taxSavings;  // Total cost minus tax savings
-    const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;  // Net investment growth minus net financing cost
-
-    // Comparison results
+    const netInvestmentValue = currentInvestment - amountFinanced;
+    const netCostOfFinancing = totalCostOfFinance - taxSavings;
+    const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;
     let comparisonOutput = `<h2>Comparison of Financing vs. Paying Cash</h2>`;
-    comparisonOutput += `<p>Net Benefit of Investing the Cash: $${netInvestmentValue.toFixed(2)}</p>`;
-    comparisonOutput += `<p>Net Cost of Financing after Tax Savings: $${netCostOfFinancing.toFixed(2)}</p>`;
-    comparisonOutput += `<p>Overall Financial Benefit of Financing: $${benefitOfFinancing.toFixed(2)}</p>`;
+    comparisonOutput += `<p>Net Benefit of Investing the Cash: $${netInvestmentValue.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
+    comparisonOutput += `<p>Net Cost of Financing after Tax Savings: $${netCostOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
+    comparisonOutput += `<p>Overall Financial Benefit of Financing: $${benefitOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
     comparisonOutput += benefitOfFinancing > 0 ? `<p>It is financially beneficial to finance the RV.</p>` : `<p>It is financially beneficial to pay cash.</p>`;
 
-    // Update HTML elements with results
-    document.getElementById('financeDetails').innerHTML = financeOutput;
-    document.getElementById('investmentResults').innerHTML = investmentOutput;
-    document
-    // Update HTML elements with results
     document.getElementById('financeDetails').innerHTML = financeOutput;
     document.getElementById('investmentResults').innerHTML = investmentOutput;
     document.getElementById('taxBenefits').innerHTML = taxOutput;
