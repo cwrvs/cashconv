@@ -17,7 +17,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center elements vertically */
+  align-items: center;
   margin-bottom: 30px;
 }
 
@@ -32,9 +32,9 @@ header p {
 }
 
 main {
-  display: grid; /* Use grid for more control over layout */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-  gap: 20px; /* Spacing between sections */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .calculator,
@@ -87,7 +87,7 @@ button:hover {
 }
 
 .results {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns for results */
+  grid-template-columns: repeat(2, 1fr); /* Two columns for results */
   gap: 20px;
 }
 
@@ -117,4 +117,23 @@ button:hover {
 
 #taxConsidered {
   font-weight: bold;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: #fff; /* Remove background color for clean printing */
+  }
+  .container {
+    box-shadow: none; /* Remove shadow on print */
+  }
+  .result-section {
+    page-break-inside: avoid; /* Avoid breaking results across pages */
+    border: 1px solid #ddd; /* Add a border for results on print */
+  }
+  .header,
+  .main,
+  #disclaimer {
+    display: none; /* Hide header, main content and disclaimer on print */
+  }
 }
