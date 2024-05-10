@@ -12,7 +12,6 @@ function calculate() {
 
     const monthlyInterestRate = apr / 100 / 12;
     const totalPayments = termYears * 12;
-    const monthlyPayment = amount
     const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
     const totalCostOfFinance = monthlyPayment * totalPayments;
     const totalInterestPaid = totalCostOfFinance - amountFinanced;
