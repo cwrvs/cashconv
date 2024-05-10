@@ -12,21 +12,20 @@
         <h1>RV Purchase Options</h1>
         <label for="amountFinanced">Amount Financed ($):</label>
         <input type="number" id="amountFinanced" placeholder="Enter amount">
-
         <label for="apr">APR (%):</label>
         <input type="number" id="apr" placeholder="Enter APR">
-
         <label for="termYears">Term (Years):</label>
         <input type="number" id="termYears" placeholder="Enter term">
-
         <label for="rateOfReturn">Rate of Return (%):</label>
         <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
-
+        <label for="annualIncome">Annual Income ($):</label>
+        <input type="number" id="annualIncome" placeholder="Enter annual income">
         <button onclick="calculate()">Calculate</button>
     </div>
     <div class="results">
         <div id="financeDetails"></div>
         <div id="investmentResults"></div>
+        <div id="taxBenefits"></div>
     </div>
 </div>
 <script src="script.js"></script>
