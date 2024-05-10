@@ -60,7 +60,12 @@ button:hover {
 
 @media (min-width: 768px) {
     .result-section {
-        flex-basis: 48%; /* Adjusted width for larger screens */
+        flex-basis: calc(50% - 10px); /* Adjusted width for larger screens with margin */
+        margin-bottom: 0; /* Removed bottom margin for better alignment */
+    }
+
+    .results {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
     }
 }
 
