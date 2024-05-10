@@ -1,32 +1,19 @@
-function calculateResults() {
-    var P = parseFloat(document.getElementById('amountFinanced').value); // principal
-    var r = parseFloat(document.getElementById('apr').value) / 100; // annual interest rate
-    var n = parseInt(document.getElementById('termYears').value); // term in years
-    var taxRate = parseFloat(document.getElementById('taxRate').value) / 100; // tax rate
+function calculate() {
+    const amountFinanced = parseFloat(document.getElementById('amountFinanced').value);
+    const apr = parseFloat(document.getElementById('apr').value);
+    const termYears = parseInt(document.getElementById('termYears').value);
+    const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
+    const incomeTaxRate = parseFloat(document.getElementById('incomeTaxRate').value);
 
-    // Compound interest for investment
-    var compoundInterest = P * Math.pow((1 + r), n);
+    const monthlyInterestRate = apr / 100 / 12;
+    const totalPayments = termYears * 12;
+    const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - (Math.pow(1 + monthlyInterestRate, -totalPayments)));
 
-    // Monthly payments for financed amount
-    var monthlyRate = r / 12; // monthly interest rate
-    var months = n * 12; // total number of payments
-    var monthlyPayment = (P * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+    const initialInvestment = amountFinanced; // Assuming paying cash means investing the full amount
+    const futureValue = initialInvestment * Math.pow(1 + rateOfReturn / 100, termYears);
 
-    // Total payments made
-    var totalPayments = monthlyPayment * months;
-    
-    // Total interest paid
-    var totalInterest = totalPayments - P;
+    let output = `Monthly Payment (if financed): $${monthlyPayment.toFixed(2)}<br>`;
+    output += `Future Value of Investment: $${futureValue.toFixed(2)}`;
 
-    // Investment growth assuming S&P 500 average returns
-    var investmentGrowth = compoundInterest; // Simplified for example
-
-    // Display the results
-    var resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = `<h2>Results</h2>
-                            <p>Total Compound Interest on Investment: $${compoundInterest.toFixed(2)}</p>
-                            <p>Monthly Payment: $${monthlyPayment.toFixed(2)}</p>
-                            <p>Total Interest Paid on Loan: $${totalInterest.toFixed(2)}</p>
-                            <p>Total Payments: $${totalPayments.toFixed(2)}</p>
-                            <p>Investment Growth: $${investmentGrowth.toFixed(2)}</p>`;
+    document.getElementById('output').innerHTML = output;
 }
