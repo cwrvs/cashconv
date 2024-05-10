@@ -1,5 +1,3 @@
-/* styles.css */
-
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -15,17 +13,17 @@ body {
     border-radius: 8px;
 }
 
-.inputs, .results {
+.calculator, .directions {
     padding: 20px;
     background-color: #fff;
     border-radius: 4px;
     margin-bottom: 20px;
 }
 
-.inputs label, .inputs input, .inputs button {
+.calculator label, .calculator input, .calculator button {
     display: block;
     width: 100%;
-    margin-top: 15px; /* Adjusted spacing */
+    margin-top: 15px;
 }
 
 input[type="number"], button {
@@ -35,7 +33,7 @@ input[type="number"], button {
 }
 
 button {
-    margin-top: 20px; /* Added margin between buttons */
+    margin-top: 20px;
     background-color: #007BFF;
     color: white;
     cursor: pointer;
@@ -52,39 +50,7 @@ button:hover {
 }
 
 .result-section {
-    flex-basis: 100%; /* Adjusted width for responsiveness */
-    background-color: #e9ecef;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.result-section-1 {
-    flex-basis: 100%; /* Adjusted width for responsiveness */
-    background-color: #e9ecef;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.result-section-2 {
-    flex-basis: 100%; /* Adjusted width for responsiveness */
-    background-color: #e9ecef;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.result-section-3 {
-    flex-basis: 100%; /* Adjusted width for responsiveness */
-    background-color: #e9ecef;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.result-section-4 {
-    flex-basis: 100%; /* Adjusted width for responsiveness */
+    flex-basis: 100%;
     background-color: #e9ecef;
     padding: 15px;
     margin-bottom: 20px;
@@ -93,18 +59,18 @@ button:hover {
 
 @media (min-width: 768px) {
     .result-section {
-        flex-basis: calc(50% - 10px); /* Adjusted width for larger screens with margin */
-        margin-bottom: 0; /* Removed bottom margin for better alignment */
+        flex-basis: calc(50% - 10px);
+        margin-bottom: 0;
     }
 
     .results {
-        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+        flex-wrap: nowrap;
     }
 }
 
 #disclaimer {
-    font-size: 14px; /* Increased font size for disclaimer */
-    color: #777; /* Added more contrast for better visibility */
+    font-size: 14px;
+    color: #777;
 }
 
 .tax-rate {
