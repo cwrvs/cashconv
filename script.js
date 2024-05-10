@@ -1,3 +1,4 @@
+// script.js
 function calculate() {
     const amountFinanced = parseFloat(document.getElementById('amountFinanced').value);
     const apr = parseFloat(document.getElementById('apr').value);
@@ -50,6 +51,7 @@ function calculate() {
 
     let taxOutput = `<h2>Tax Benefits</h2>`;
     taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
+    taxOutput += `<p>Tax Rate: ${taxRate * 100}%</p>`; // Display the current tax rate
 
     const netInvestmentValue = currentInvestment - amountFinanced;
     const netCostOfFinancing = totalCostOfFinance - taxSavings;
