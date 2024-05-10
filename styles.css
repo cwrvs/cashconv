@@ -1,4 +1,5 @@
 /* styles.css */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -51,6 +52,38 @@ button:hover {
 }
 
 .result-section {
+    flex-basis: 100%; /* Adjusted width for responsiveness */
+    background-color: #e9ecef;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.result-section-1 {
+    flex-basis: 100%; /* Adjusted width for responsiveness */
+    background-color: #e9ecef;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.result-section-2 {
+    flex-basis: 100%; /* Adjusted width for responsiveness */
+    background-color: #e9ecef;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.result-section-3 {
+    flex-basis: 100%; /* Adjusted width for responsiveness */
+    background-color: #e9ecef;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.result-section-4 {
     flex-basis: 100%; /* Adjusted width for responsiveness */
     background-color: #e9ecef;
     padding: 15px;
