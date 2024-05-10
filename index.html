@@ -8,23 +8,28 @@
 </head>
 <body>
 <div class="container">
-    <h1>RV Financing Wizard</h1>
-    <div class="results-sections">
-        <div id="financeDetails" class="result-box">
-            <!-- Finance Details will be displayed here -->
-        </div>
-        <div id="taxBenefits" class="result-box">
-            <!-- Tax Benefits will be displayed here -->
-        </div>
-        <div id="investmentResults" class="result-box">
-            <!-- Investment Growth will be displayed here -->
-        </div>
-        <div id="comparisonResults" class="result-box">
-            <!-- Comparison Results will be displayed here -->
-        </div>
+    <div class="inputs">
+        <h1>RV Financing Wizard</h1>
+        <label for="amountFinanced">Amount Financed ($):</label>
+        <input type="number" id="amountFinanced" placeholder="Enter amount">
+        <label for="apr">APR (%):</label>
+        <input type="number" id="apr" placeholder="Enter APR">
+        <label for="termYears">Term (Years):</label>
+        <input type="number" id="termYears" placeholder="Enter term">
+        <label for="rateOfReturn">Rate of Return (%):</label>
+        <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
+        <label for="annualIncome">Annual Income ($):</label>
+        <input type="number" id="annualIncome" placeholder="Enter annual income">
+        <button onclick="calculate()">Calculate</button>
+        <button onclick="printResults()">Print Results</button> <!-- Restored print button -->
+    </div>
+    <div class="results">
+        <div id="financeDetails" class="result-section"></div>
+        <div id="taxBenefits" class="result-section"></div>
+        <div id="investmentResults" class="result-section"></div>
+        <div id="comparisonResults" class="result-section"></div>
     </div>
     <p id="disclaimer">Disclaimer: This calculator is provided for informational and educational purposes only, based on simplified assumptions and typical cases. It is not intended as financial or tax advice. The accuracy of the calculations and the applicability to your circumstances are not guaranteed. Please consult a financial professional or tax advisor for personal advice before making significant financial decisions.</p>
-    <button onclick="calculateAndPrint()">Print Results</button>
 </div>
 <script src="script.js"></script>
 </body>
