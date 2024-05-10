@@ -15,10 +15,10 @@ function calculate() {
   const totalPayments = termYears * 12;
   const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
   const totalCostOfFinance = monthlyPayment * totalPayments;
-  const totalInterestPaid = considerTaxWriteOff ? totalCostOfFinance - amountFinanced : 0; // Only calculate interest if tax write-off considered
+  const totalInterestPaid = considerTaxWriteOff ? totalCostOfFinance - amountFinanced : 0;
 
   let taxRate;
-  if (annualIncome <= 9975) { // Updated for 2024 tax bracket
+  if (annualIncome <= 9975) {
     taxRate = 0.10;
   } else if (annualIncome <= 40525) {
     taxRate = 0.12;
@@ -34,7 +34,7 @@ function calculate() {
     taxRate = 0.37;
   }
 
-  const taxSavings = considerTaxWriteOff ? totalInterestPaid * taxRate : 0; // Only calculate tax savings if considered
+  const taxSavings = considerTaxWriteOff ? totalInterestPaid * taxRate : 0;
 
   let financeOutput = `<h2>Finance Details</h2>`;
   financeOutput += `<p>Monthly Payment: $${monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
@@ -45,7 +45,7 @@ function calculate() {
   let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
   for (let year = 1; year <= termYears; year++) {
     currentInvestment *= 1 + rateOfReturn / 100;
-    investmentOutput += `<tr><td><span class="math-inline">\{year\}</td\><td\></span>${currentInvestment.toLocaleString('en-US', {maximumFractionDigits: 2})}</td></tr>`;
+    investmentOutput += `<tr><td>${year}</td><td>$${currentInvestment.toLocaleString('en-US', {maximumFractionDigits: 2})}</td></tr>`;
   }
   investmentOutput += `</table>`;
 
@@ -57,6 +57,34 @@ function calculate() {
   const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;
 
   let comparisonOutput = `<h2>Comparison of Financing vs. Paying Cash</h2>`;
-  comparisonOutput += `<p>Net Benefit of Investing the Cash: $${netInvestmentValue.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-  comparisonOutput += `<p>Net Cost of Financing after Tax Savings: $${netCostOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-  comparisonOutput += `<p>Overall Financial
+  comparisonOutput += `<p>Net Benefit of Investing the Cash: $${netInvestmentValue.toLocaleString('en-US
+  comparisonOutput += '<p>Net Benefit of Investing the Cash: $' + netInvestmentValue.toLocaleString('en-US', {maximumFractionDigits: 2}) + '</p>';
+  comparisonOutput += '<p>Net Cost of Financing after Tax Savings: $' + netCostOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2}) + '</p>';
+  comparisonOutput += '<p>Overall Financial Benefit of Choosing to Finance: $' + benefitOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2}) + '</p>';
+  updateResults(financeOutput, investmentOutput, taxOutput, comparisonOutput);
+}
+
+function updateResults(financeOutput, investmentOutput, taxOutput, comparisonOutput) {
+  const financeDetails = document.getElementById('financeDetails');
+  financeDetails.innerHTML = financeOutput;
+
+  const investmentResults = document.getElementById('investmentResults');
+  investmentResults.innerHTML = investmentOutput;
+
+  const taxBenefits = document.getElementById('taxBenefits');
+  taxBenefits.innerHTML = taxOutput;
+
+  const comparisonResults = document.getElementById('comparisonResults');
+  comparisonResults.innerHTML = comparisonOutput;
+
+  document.getElementById('results').classList.remove('hidden'); // Make sure to define CSS class 'hidden' as { display: none; }
+}
+
+function printResults() {
+  window.print();
+}
+
+document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting in the traditional way
+  calculate();
+});
