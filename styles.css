@@ -1,85 +1,47 @@
 body {
-  font-family: sans-serif;
+  font-family: sans-serif; /* Use a generic sans-serif font */
   background-color: #f4f4f4;
   margin: 0;
   padding: 20px;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
-  padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-header p {
-  font-size: 1.1rem;
-  color: #777;
-}
-
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
 }
 
 .calculator,
-.results {
+.directions {
+  padding: 20px;
   background-color: #fff;
   border-radius: 4px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-fieldset {
-  border: none;
-  padding: 0;
-}
-
-legend {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f4f4f4;
-}
-
-label {
+.calculator label,
+.calculator input,
+.calculator button {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  width: 100%;
+  margin-bottom: 10px; /* Adjust spacing for better flow */
 }
 
-input,
+input[type="number"],
 button {
-  width: 100%;
-  padding: 12px 15px;
+  padding: 12px 16px; /* Increase padding for better touch target area */
   border-radius: 4px;
   border: 1px solid #ccc;
-  font-size: 1rem;
 }
 
 button {
-  margin-top: 15px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out; /* Add smooth hover effect */
 }
 
 button:hover {
@@ -87,53 +49,36 @@ button:hover {
 }
 
 .results {
-  grid-template-columns: repeat(2, 1fr); /* Two columns for results */
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .result-section {
-  background-color: #f4f4f4;
-  padding: 20px;
+  flex-basis: 100%;
+  background-color: #e9ecef;
+  padding: 15px;
   margin-bottom: 20px;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .result-section {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 0;
+  }
+
+  .results {
+    flex-wrap: nowrap;
+  }
 }
 
 #disclaimer {
-  font-size: 0.8rem;
+  font-size: 14px;
   color: #777;
-  margin-top: 30px;
-  text-align: center;
 }
 
-.tax-section {
-  display: flex;
-  align-items: center;
-}
-
-.tax-section label {
-  margin-right: 10px;
-}
-
-#taxConsidered {
+.tax-rate {
   font-weight: bold;
-}
-
-/* Print styles */
-@media print {
-  body {
-    background-color: #fff; /* Remove background color for clean printing */
-  }
-  .container {
-    box-shadow: none; /* Remove shadow on print */
-  }
-  .result-section {
-    page-break-inside: avoid; /* Avoid breaking results across pages */
-    border: 1px solid #ddd; /* Add a border for results on print */
-  }
-  .header,
-  .main,
-  #disclaimer {
-    display: none; /* Hide header, main content and disclaimer on print */
-  }
+  margin-top: 10px;
 }
