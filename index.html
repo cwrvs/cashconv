@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RV Financing Wizard: Discover the Best Way to Buy Your RV</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV Financing Wizard: Discover the Best Way to Buy Your RV</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>RV Financing Wizard</h1>
-      <p>Find the best financing option for your dream RV.</p>
-    </header>
-    <main>
-      <form id="calculatorForm">
-        <fieldset>
-          <legend>Financial Information</legend>
-          <label for="amountFinanced">Amount Financed ($):</label>
-          <input type="number" id="amountFinanced" placeholder="Enter amount" required>
-          <label for="apr">APR (%):</label>
-          <input type="number" id="apr" placeholder="Enter APR" required>
-          <label for="termYears">Term (Years):</label>
-          <input type="number" id="termYears" placeholder="Enter term" required>
-          <label for="rateOfReturn">Rate of Return (%):</label>
-          <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
-          <label for="annualIncome">Annual Income ($):</label>
-          <input type="number" id="annualIncome" placeholder="Enter annual income" required>
-          <div class="tax-section">
-            <label for="taxWriteOff">Consider Tax Write-Offs? (e.g., Interest)</label>
-            <input type="checkbox" id="taxWriteOff">
-          </div>
-          <button type="submit">Calculate</button>
-          <button type="button" onclick="printResults()">Print Results</button>
-        </fieldset>
-      </form>
-      <div id="results" class="hidden">
-        <div id="financeDetails"></div>
-        <div id="investmentResults"></div>
-        <div id="taxBenefits"></div>
-        <div id="comparisonResults"></div>
-      </div>
-    </main>
-    <div class="
-    directions">
-      <h2>Directions:</h2>
-      <p>Fill in the fields with the appropriate values. Then click the "Calculate" button to see the results.</p>
+    <div class="container">
+        <div class="calculator">
+            <h1>RV Financing Wizard</h1>
+            <label for="amountFinanced">Amount Financed ($):</label>
+            <input type="number" id="amountFinanced" placeholder="Enter amount">
+            <label for="apr">APR (%):</label>
+            <input type="number" id="apr" placeholder="Enter APR">
+            <label for="termYears">Term (Years):</label>
+            <input type="number" id="termYears" placeholder="Enter term">
+            <label for="rateOfReturn">Rate of Return (%):</label>
+            <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
+            <label for="annualIncome">Annual Income ($):</label>
+            <input type="number" id="annualIncome" placeholder="Enter annual income">
+            <div>
+              <label for="factorTaxCheckbox">Factor in Tax Savings?</label>
+              <input type="checkbox" id="factorTaxCheckbox" checked>
+            </div>
+            <button onclick="calculateLoanComparison()">Calculate</button>
+            <button onclick="printResults()">Print Results</button>
+        </div>
+        <div class="results">
+            <div id="financeDetails" class="result-section"></div>
+            <div id="taxBenefits" class="result-section"></div>
+            <div id="investmentResults" class="result-section"></div>
+            <div id="comparisonResults" class="result-section"></div>
+        </div>
+        <div class="directions">
+            <h2>Directions:</h2>
+            <p>Fill in the fields with the appropriate values for amount financed, APR, term, rate of return, and annual income. Then click the "Calculate" button to see the results. You can also click the "Print Results" button to print your results.</p>
+        </div>
+        <p id="disclaimer">Disclaimer: This calculator is provided for informational and educational purposes only, based on simplified assumptions and typical cases. It is not intended as financial or tax advice. The accuracy of the calculations and the applicability to your circumstances are not guaranteed. Please consult a financial professional or tax advisor for personal advice before making significant financial decisions.</p>
     </div>
-    <p id="disclaimer">Disclaimer: This calculator is provided for informational and educational purposes only, based on simplified assumptions and typical cases. It is not intended as financial or tax advice. The accuracy of the calculations and the applicability to your circumstances are not guaranteed. Please consult a financial professional or tax advisor for personal advice before making significant financial decisions.</p>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
