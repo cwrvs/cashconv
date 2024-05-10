@@ -10,7 +10,7 @@
 
 <body>
     <div class="container">
-        <div class="calculator">
+        <div class="inputs">
             <h1>RV Financing Wizard</h1>
             <label for="amountFinanced">Amount Financed ($):</label>
             <input type="number" id="amountFinanced" placeholder="Enter amount">
@@ -23,6 +23,7 @@
             <label for="annualIncome">Annual Income ($):</label>
             <input type="number" id="annualIncome" placeholder="Enter annual income">
             <button onclick="calculate()">Calculate</button>
+            <button onclick="printResults()">Print Results</button> <!-- Restored print button -->
         </div>
         <div class="results">
             <div id="financeDetails" class="result-section"></div>
@@ -33,7 +34,6 @@
         <div class="directions">
             <h2>Directions:</h2>
             <p>Fill in the fields with the appropriate values for amount financed, APR, term, rate of return, and annual income. Then click the "Calculate" button to see the results. You can also click the "Print Results" button to print your results.</p>
-            <button onclick="printResults()">Print Results</button> <!-- Moved print button here -->
         </div>
         <p id="disclaimer">Disclaimer: This calculator is provided for informational and educational purposes only, based on simplified assumptions and typical cases. It is not intended as financial or tax advice. The accuracy of the calculations and the applicability to your circumstances are not guaranteed. Please consult a financial professional or tax advisor for personal advice before making significant financial decisions.</p>
     </div>
