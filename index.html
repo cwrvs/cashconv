@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RV Financing Wizard: Discover the Best Way to Buy Your RV</title>
-<meta name="description" content="Use the RV Financing Wizard to compare financing vs. paying cash for your RV. Discover tax benefits and investment growth to make an informed decision.">
-<meta name="keywords" content="RV financing calculator, RV loan vs cash, RV investment calculator, RV tax benefits">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,16 +21,16 @@
         <label for="annualIncome">Annual Income ($):</label>
         <input type="number" id="annualIncome" placeholder="Enter annual income">
         <button onclick="calculate()">Calculate</button>
+        <button onclick="printResults()">Print Results</button>
     </div>
     <div class="results">
-        <div id="financeDetails"></div>
-        <div id="investmentResults"></div>
-        <div id="taxBenefits"></div>
-        <div id="comparisonResults"></div>
+        <div id="financeDetails" class="result-section"></div>
+        <div id="taxBenefits" class="result-section"></div>
+        <div id="investmentResults" class="result-section"></div>
+        <div id="comparisonResults" class="result-section"></div>
     </div>
+    <p id="disclaimer">Disclaimer: This calculator is provided for informational purposes only. Actual terms and tax savings may vary based on specifics of your financial situation and current tax laws. Consult with a financial advisor or tax professional before making any financial decisions.</p>
 </div>
 <script src="script.js"></script>
-    <button onclick="printResults()">Print Results</button>
-
 </body>
 </html>
