@@ -13,13 +13,17 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 60%;
+}
+
+input[type="number"], label {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
 }
 
 input[type="number"] {
-    display: block;
-    width: calc(100% - 20px);
     padding: 10px;
-    margin: 10px 0;
     border: 2px solid #ccc;
     border-radius: 4px;
 }
