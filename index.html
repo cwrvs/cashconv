@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RV Financing Wizard: Discover the Best Way to Buy Your RV</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="container">
     <header>
@@ -32,25 +30,19 @@
             <label for="taxWriteOff">Consider Tax Write-Offs? (e.g., Interest)</label>
             <input type="checkbox" id="taxWriteOff">
           </div>
+          <button type="submit">Calculate</button>
+          <button type="button" onclick="printResults()">Print Results</button>
         </fieldset>
-        <button type="submit">Calculate</button>
       </form>
       <div id="results" class="hidden">
-        <div id="financeDetails">
-          <h2>Finance Details</h2>
-          </div>
-        <div id="investmentResults">
-          <h2>Investment Growth</h2>
-          </div>
-        <div id="taxBenefits">
-          <h2>Tax Benefits (**Considered in Calculations**): <span id="taxConsidered"></span></h2>
-          </div>
-        <div id="comparisonResults">
-          <h2>Comparison of Financing vs. Paying Cash</h2>
-          </div>
+        <div id="financeDetails"></div>
+        <div id="investmentResults"></div>
+        <div id="taxBenefits"></div>
+        <div id="comparisonResults"></div>
       </div>
     </main>
-    <div class="directions">
+    <div class="
+    directions">
       <h2>Directions:</h2>
       <p>Fill in the fields with the appropriate values. Then click the "Calculate" button to see the results.</p>
     </div>
@@ -58,5 +50,4 @@
   </div>
   <script src="script.js"></script>
 </body>
-
 </html>
