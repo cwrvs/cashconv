@@ -4,13 +4,13 @@ function calculate() {
     const termYears = parseInt(document.getElementById('termYears').value);
     const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
 
-    let output = `<table><tr><th>Year</th><th>Investment Value</th></tr>`;
+    const monthlyInterestRate = apr / 100 / 12;
+    const totalPayments = termYears * 12;
+    const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
+    const totalCostOfFinance = monthlyPayment * totalPayments;
 
-    let currentInvestment = amountFinanced;
-    for (let year = 1; year <= 20; year++) {  // Assuming a maximum of 20 years for display
-        currentInvestment *= (1 + rateOfReturn / 100);
-        output += `<tr${year === termYears ? ' class="highlight"' : ''}><td>${year}</td><td>$${currentInvestment.toFixed(2)}</td></tr>`;
-    }
-    output += `</table>`;
-    document.getElementById('output').innerHTML = output;
-}
+    let financeOutput = `<h2>Finance Details</h2>`;
+    financeOutput += `<p>Monthly Payment: $${monthlyPayment.toFixed(2)}</p>`;
+    financeOutput += `<p>Total Payment Over ${termYears} Years: $${totalCostOfFinance.toFixed(2)}</p>`;
+
+    let investmentOutput = `<h2>Investment Growth</h2
