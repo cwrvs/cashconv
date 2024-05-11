@@ -52,30 +52,36 @@ button:hover {
     background-color: #0062cc;
 }
 
-/* Results section layout */
-.results {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+/* Results table styling */
+#resultsTable table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* Individual result section styling */
-.result-section {
-    flex-basis: 100%;
-    background-color: #e9ecef;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
+#resultsTable th, #resultsTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
 }
 
-/* Responsive layout adjustments */
-@media (min-width: 768px) {
-    .result-section {
-        flex-basis: calc(50% - 10px);
-        margin-bottom: 0;
-    }
+#
+resultsTable th {
+    background-color: #f2f2f2;
+}
 
-    .results {
-        flex-wrap: nowrap;
-    }
+#resultsTable th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#summaryAdvice {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+#disclaimer {
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
 }
