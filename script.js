@@ -44,7 +44,7 @@ function calculate() {
   let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
   for (let year = 1; year <= termYears; year++) {
     currentInvestment *= 1 + rateOfReturn / 100;
-    investmentOutput += `<tr><td><span class="math-inline">\{year\}</td\><td\></span>${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td></tr>`;
+    investmentOutput += `<tr><td>${year}</td><td>$${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td></tr>`; // Curly brace fixed here
   }
   investmentOutput += `</table>`;
 
@@ -62,3 +62,4 @@ function calculate() {
   comparisonOutput += benefitOfFinancing > 0 ? `<p>It is financially beneficial to finance the RV.</p>` : `<p>It is financially beneficial to pay cash.</p>`;
 
   document.getElementById('financeDetails').innerHTML = financeOutput;
+}
