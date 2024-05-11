@@ -6,37 +6,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
         const annualIncome = parseFloat(document.getElementById('annualIncome').value);
 
-        const details = calculateFinancialDetails(amount, apr, term, rateOfReturn, annualIncome);
-        displayResults(details);
-        provideAdvice(details, amount);
+        const results = calculateFinancialDetails(amount, apr, term, rateOfReturn);
+        displayResults(results);
+        provideAdvice(amount, results);
     });
 });
 
-function calculateFinancialDetails(amount, apr, term, rateOfReturn, annualIncome) {
+function calculateFinancialDetails(amount, apr, term, rateOfReturn) {
     const monthlyRate = apr / 100 / 12;
     const monthlyPayment = amount * monthlyRate / (1 - Math.pow(1 + monthlyRate, -term * 12));
-    const investmentReturnRate = rateOfReturn / 100 / 12;
-    
-    let currentBalance = amount;
+    let investmentBalance = amount; // Start with the initial amount if invested
     let totalInterestPaid = 0;
-    let investmentBalance = 0;
-    let results = [];
 
+    let results = [];
     for (let year = 1; year <= term; year++) {
-        let interestPaidYearly = 0;
+        let annualInterestPaid = 0;
+        let monthlyInvestmentGrowth = investmentBalance;
+
         for (let month = 1; month <= 12; month++) {
-            let monthlyInterest = currentBalance * monthlyRate;
-            interestPaidYearly += monthlyInterest;
-            currentBalance -= (monthlyPayment - monthlyInterest);
-            investmentBalance += monthlyPayment;
-            investmentBalance *= (1 + investmentReturnRate);
+            annualInterestPaid += monthlyPayment * monthlyRate;
+            monthlyInvestmentGrowth *= (1 + rateOfReturn / 100 / 12);
         }
-        totalInterestPaid += interestPaidYearly;
+
+        investmentBalance = monthlyInvestmentGrowth;
+        totalInterestPaid += annualInterestPaid;
         results.push({
             year: year,
             investmentGrowth: investmentBalance,
-            interestPaid: interestPaidYearly,
-            endingBalance: currentBalance
+            interestPaid: annualInterestPaid,
+            endingBalance: amount - (monthlyPayment * 12 * year)
         });
     }
 
@@ -45,9 +43,9 @@ function calculateFinancialDetails(amount, apr, term, rateOfReturn, annualIncome
 
 function displayResults(results) {
     const resultsBody = document.getElementById('resultsBody');
-    resultsBody.innerHTML = '';  // Clear previous results
+    resultsBody.innerHTML = ''; // Clear previous results
     results.forEach(result => {
-        let row = `<tr>
+        const row = `<tr>
             <td>${result.year}</td>
             <td>$${result.investmentGrowth.toFixed(2)}</td>
             <td>$${result.interestPaid.toFixed(2)}</td>
@@ -57,17 +55,13 @@ function displayResults(results) {
     });
 }
 
-function provideAdvice(results, initialAmount) {
+function provideAdvice(initialAmount, results) {
     const lastResult = results[results.length - 1];
-    const netGain = lastResult.investmentGrowth - (initialAmount + lastResult.interestPaid);
+    const netGainFromInvesting = lastResult.investmentGrowth - initialAmount;
+    const totalCostOfFinancing = results.reduce((acc, result) => acc + result.interestPaid, 0);
     const adviceElement = document.getElementById('summaryAdvice');
-    if (netGain > 0) {
-        adviceElement.textContent = "It makes more sense to finance the purchase. Potential gain by investing instead of paying cash: $" + netGain.toFixed(2);
-    } else {
-        adviceElement.textContent = "It makes more sense to pay cash. Potential loss by financing: $" + Math.abs(netGain).toFixed(2);
-    }
-}
-
-function printResults() {
-    window.print();
+    const adviceText = netGainFromInvesting > totalCostOfFinancing ?
+        "It makes more sense to finance the purchase. By investing the initial amount, you could gain an additional $" + (netGainFromInvesting - totalCostOfFinancing).toFixed(2) :
+        "It makes more sense to pay cash. Financing would cost you an additional $" + (totalCostOfFinancing - netGainFromInvesting).toFixed(2);
+    adviceElement.textContent = adviceText;
 }
