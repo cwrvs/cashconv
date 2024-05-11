@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RV Financing Wizard: Discover the Best Way to Buy Your RV</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -24,7 +25,7 @@
                 <input type="checkbox" id="includeTaxes" checked>
                 <label for="includeTaxes">Include Tax Calculations</label>
             </div>
-            <button onclick="calculate()">Calculate</button>
+            <button id="calculateButton">Calculate</button>
             <button onclick="printResults()">Print Results</button>
         </div>
         <div class="results">
@@ -37,6 +38,8 @@
             <h2>Directions:</h2>
             <p>Fill in the fields with the appropriate values for amount financed, APR, term, rate of return, and annual income. Then click the "Calculate" button to see the results. You can also click the "Print Results" button to print your results.</p>
         </div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <p id="advice"></p>
         <p id="disclaimer">Disclaimer: This calculator is provided for informational and educational purposes only, based on simplified assumptions and typical cases. It is not intended as financial or tax advice. The accuracy of the calculations and the applicability to your circumstances are not guaranteed. Please consult a financial professional or tax advisor for personal advice before making significant financial decisions.</p>
     </div>
     <script src="script.js"></script>
