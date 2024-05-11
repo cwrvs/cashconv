@@ -52,9 +52,15 @@ button:hover {
 }
 
 .result-section {
-  flex-basis: calc(33.33% - 10px); /* Adjusted width for responsiveness */
+  flex-basis: calc(50% - 10px); /* Adjusted width for responsiveness */
   background-color: #e9ecef;
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .result-section {
+    flex-basis: calc(33.33% - 10px); /* Adjusted width for responsiveness */
+  }
 }
