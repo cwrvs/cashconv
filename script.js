@@ -62,7 +62,29 @@ function calculate() {
   // Calculate benefit of financing
   const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;
 
-  // Build the result string with explanations
+  // **Results Section with Math**
+
+  let financeOutput = `<h2>Finance Details</h2>`;
+  financeOutput += `<p>Monthly Payment: $${monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`; // Monthly Payment
+  financeOutput += `<p>Total Payment Over ${termYears} Years: $${totalCostOfFinance.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`; // Total Payment Over Years
+  financeOutput += `<p>Total Interest Paid: $${totalInterestPaid.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`; // Total Interest Paid
+
+  let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
+  let currentInvestmentTable = amountFinanced;
+  for (let year = 1; year <= termYears; year++) {
+    currentInvestmentTable *= 1 + rateOfReturn / 100;
+    investmentOutput += `<tr><td>${year}</td><td>$${currentInvestmentTable.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td></tr>`;
+  }
+  investmentOutput += `</table>`;
+
+  let taxOutput = `<h2>Tax Benefits</h2>`;
+  if (includeTaxes) {
+    taxOutput += `<p>Effective Tax Rate: ${effectiveTaxRate.toFixed(2)}%</p>`; // Display effective tax rate
+    taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;  // Tax Savings
+  } else {
+    taxOutput += `<p>Tax savings not included in calculations.</p>`;
+  }
+
   let comparisonOutput = `<h2>Comparison of Financing vs. Paying Cash</h2>`;
   comparisonOutput += `<p>When you finance your RV purchase:</p>`;
   comparisonOutput += `<ul>`;
@@ -72,10 +94,13 @@ function calculate() {
     comparisonOutput += `<li>You potentially save money on taxes by deducting $${taxSavings.toLocaleString('en-US', { maximumFractionDigits: 2 })} in interest, based on an effective tax rate of ${effectiveTaxRate.toFixed(2)}%.</li>`;
   }
   comparisonOutput += `<li>Your investment grows to $${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })} over ${termYears} years.</li>`;
+  comparisonOutput += `<li>By financing, your net benefit compared to paying cash is $${benefitOfFinancing.toLocaleString('en-US', { maximumFractionDigits: 2 })}.</li>`;
   comparisonOutput += `</ul>`;
-  comparisonOutput += `<p>By financing, your net benefit compared to paying cash is $${benefitOfFinancing.toLocaleString('en-US', { maximumFractionDigits: 2 })}.</p>`;
 
-  // Display the result
+  // Display the results
+  document.getElementById('financeOutput').innerHTML = financeOutput;
+  document.getElementById('investmentOutput').innerHTML = investmentOutput;
+  document.getElementById('taxOutput').innerHTML = taxOutput;
   document.getElementById('comparisonOutput').innerHTML = comparisonOutput;
 }
 
