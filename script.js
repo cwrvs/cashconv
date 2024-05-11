@@ -52,53 +52,43 @@ function calculate() {
     effectiveTaxRate = taxRate * 100; // Convert tax rate to percentage
   }
 
-  // **Results Section with Math**
-
-  let financeOutput = `<h2>Finance Details</h2>`;
-  financeOutput += `<p>Monthly Payment: $${monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`; // Monthly Payment
-
-  // Total Payment Over Years = Monthly Payment * Total Payments
-  financeOutput += `<p>Total Payment Over ${termYears} Years: $${totalCostOfFinance.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;
-
-  // Total Interest Paid = Total Cost of Finance - Amount Financed
-  financeOutput += `<p>Total Interest Paid: $${totalInterestPaid.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;
-
-  let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
-  let currentInvestment = amountFinanced;
-  for (let year = 1; year <= termYears; year++) {
-    currentInvestment *= 1 + rateOfReturn / 100;
-    investmentOutput += `<tr><td><span class="math-inline">${year}</span></td><td>${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td></tr>`;
-  }
-  investmentOutput += `</table>`;
-
-  let taxOutput = `<h2>Tax Benefits</h2>`;
-  if (includeTaxes) {
-    taxOutput += `<p>Effective Tax Rate: ${effectiveTaxRate.toFixed(2)}%</p>`; // Display effective tax rate
-    taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;  // Tax Savings
-  } else {
-    taxOutput += `<p>Tax savings not included in calculations.</p>`;
-  }
-
-  // Net
-  // Net Investment Value = Investment Growth (Final Year) - Amount Financed
+  // Calculate net investment value
+  const currentInvestment = calculateInvestmentGrowth(amountFinanced, rateOfReturn, termYears);
   const netInvestmentValue = currentInvestment - amountFinanced;
 
-  // Net Cost of Financing = Total Cost of Finance - Tax Savings
+  // Calculate net cost of financing
   const netCostOfFinancing = totalCostOfFinance - taxSavings;
 
-  // Benefit of Financing = Net Investment Value - Net Cost of Financing
+  // Calculate benefit of financing
   const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;
 
+  // Build the result string with explanations
   let comparisonOutput = `<h2>Comparison of Financing vs. Paying Cash</h2>`;
-  comparisonOutput += `<p>Net Benefit of Financing: $${benefitOfFinancing.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;
+  comparisonOutput += `<p>When you finance your RV purchase:</p>`;
+  comparisonOutput += `<ul>`;
+  comparisonOutput += `<li>You pay a monthly payment of $${monthlyPayment.toFixed(2)} for ${termYears} years.</li>`;
+  comparisonOutput += `<li>You pay a total of $${totalCostOfFinance.toLocaleString('en-US', { maximumFractionDigits: 2 })}, including $${totalInterestPaid.toLocaleString('en-US', { maximumFractionDigits: 2 })} in interest.</li>`;
+  if (includeTaxes) {
+    comparisonOutput += `<li>You potentially save money on taxes by deducting $${taxSavings.toLocaleString('en-US', { maximumFractionDigits: 2 })} in interest, based on an effective tax rate of ${effectiveTaxRate.toFixed(2)}%.</li>`;
+  }
+  comparisonOutput += `<li>Your investment grows to $${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })} over ${termYears} years.</li>`;
+  comparisonOutput += `</ul>`;
+  comparisonOutput += `<p>By financing, your net benefit compared to paying cash is $${benefitOfFinancing.toLocaleString('en-US', { maximumFractionDigits: 2 })}.</p>`;
 
-  document.getElementById('financeOutput').innerHTML = financeOutput;
-  document.getElementById('investmentOutput').innerHTML = investmentOutput;
-  document.getElementById('taxOutput').innerHTML = taxOutput;
+  // Display the result
   document.getElementById('comparisonOutput').innerHTML = comparisonOutput;
 }
 
 function toggleTaxes() {
   // Function to toggle tax calculations based on checkbox state
   calculate();
+}
+
+function calculateInvestmentGrowth(principal, rateOfReturn, years) {
+  // Function to calculate investment growth over time
+  let investment = principal;
+  for (let i = 0; i < years; i++) {
+    investment *= 1 + rateOfReturn / 100;
+  }
+  return investment;
 }
