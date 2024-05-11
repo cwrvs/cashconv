@@ -63,4 +63,3 @@ function calculate() {
 
   document.getElementById('financeDetails').innerHTML = financeOutput;
   document.getElementById('investmentResults').innerHTML = investmentOutput;
-  document.getElementById('taxBenefits').innerHTML = tax
