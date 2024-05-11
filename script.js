@@ -62,4 +62,3 @@ function calculate() {
   comparisonOutput += benefitOfFinancing > 0 ? `<p>It is financially beneficial to finance the RV.</p>` : `<p>It is financially beneficial to pay cash.</p>`;
 
   document.getElementById('financeDetails').innerHTML = financeOutput;
-  document.getElementById('investmentResults').innerHTML = investmentOutput;
