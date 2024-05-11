@@ -57,11 +57,11 @@ function calculate() {
   // Total Interest Paid = Total Cost of Finance - Amount Financed
   financeOutput += `<p>Total Interest Paid: $${totalInterestPaid.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;
 
-  let investmentOutput = `<h2>Investment Growth</h4><table><tr><th>Year</th><th>Value</th></tr>`;
+  let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
   let currentInvestment = amountFinanced;
   for (let year = 1; year <= termYears; year++) {
     currentInvestment *= 1 + rateOfReturn / 100;
-    investmentOutput += `<tr><td><span class="math-inline">\{year\}</td\><td\></span>${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td></tr>`;
+    investmentOutput += `<tr><td><span class="math-inline">${year}</span></td><td>${currentInvestment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td></tr>`;
   }
   investmentOutput += `</table>`;
 
@@ -78,4 +78,10 @@ function calculate() {
   const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;
 
   let comparisonOutput = `<h2>Comparison of Financing vs. Paying Cash</h2>`;
-  comparisonOutput += `<p>Net Benefit of Investing
+  comparisonOutput += `<p>Net Benefit of Financing: $${benefitOfFinancing.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;
+
+  document.getElementById('financeOutput').innerHTML = financeOutput;
+  document.getElementById('investmentOutput').innerHTML = investmentOutput;
+  document.getElementById('taxOutput').innerHTML = taxOutput;
+  document.getElementById('comparisonOutput').innerHTML = comparisonOutput;
+}
