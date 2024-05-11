@@ -35,6 +35,15 @@ input[type="number"], button {
     border: 1px solid #ccc;
 }
 
+/* Bold labels */
+.bold-label {
+    font-weight: bold;
+    border: none; /* Remove border if there was any */
+    background: none; /*
+    background: none; /* Remove background styling */
+    padding-left: 0; /* Remove padding on the left if needed */
+}
+
 /* Button specific styling */
 button {
     background-color: #007bff;
@@ -84,4 +93,9 @@ button:hover {
 .tax-rate {
     font-weight: bold;
     margin-top: 10px;
+}
+
+/* Checkbox styling */
+.checkbox-section {
+    margin-top: 20px;
 }
