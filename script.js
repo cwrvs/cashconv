@@ -1,72 +1,70 @@
-function calculate() {
-    const amountFinanced = parseFloat(document.getElementById('amountFinanced').value);
-    const apr = parseFloat(document.getElementById('apr').value);
-    const termYears = parseInt(document.getElementById('termYears').value);
-    const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
-    const annualIncome = parseFloat(document.getElementById('annualIncome').value);
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('amountFinanced').addEventListener('blur', formatInput);
+    document.getElementById('apr').addEventListener('blur', formatInput);
+    document.getElementById('termYears').addEventListener('blur', formatInput);
+    document.getElementById('rateOfReturn').addEventListener('blur', formatInput);
+    document.getElementById('annualIncome').addEventListener('blur', formatInput);
+    document.getElementById('includeTaxes').addEventListener('change', calculate);
+});
 
-    if (isNaN(amountFinanced) || isNaN(apr) || isNaN(termYears) || isNaN(rateOfReturn) || isNaN(annualIncome)) {
-        alert("Please fill all fields with valid numbers.");
-        return;
+function formatInput(event) {
+    const target = event.target;
+    const value = parseFloat(target.value);
+    if (isNaN(value)) return; // Stop if the value isn't a number
+
+    if (target.id === 'amountFinanced' || target.id === 'annualIncome') {
+        target.value = value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    } else if (target.id === 'apr' || target.id === 'rateOfReturn') {
+        target.value = value.toFixed(2) + '%';
     }
-
-    const monthlyInterestRate = apr / 100 / 12;
-    const totalPayments = termYears * 12;
-    const monthlyPayment = amountFinanced * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
-    const totalCostOfFinance = monthlyPayment * totalPayments;
-    const totalInterestPaid = totalCostOfFinance - amountFinanced;
-
-    let taxRate;
-    if (annualIncome <= 9875) {
-        taxRate = 0.10;
-    } else if (annualIncome <= 40125) {
-        taxRate = 0.12;
-    } else if (annualIncome <= 85525) {
-        taxRate = 0.22;
-    } else if (annualIncome <= 163300) {
-        taxRate = 0.24;
-    } else if (annualIncome <= 207350) {
-        taxRate = 0.32;
-    } else if (annualIncome <= 518400) {
-        taxRate = 0.35;
-    } else {
-        taxRate = 0.37;
-    }
-
-    const taxSavings = totalInterestPaid * taxRate;
-
-    let financeOutput = `<h2>Finance Details</h2>`;
-    financeOutput += `<p>Monthly Payment: $${monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-    financeOutput += `<p>Total Payment Over ${termYears} Years: $${totalCostOfFinance.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-    financeOutput += `<p>Total Interest Paid: $${totalInterestPaid.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-
-    let currentInvestment = amountFinanced;
-    let investmentOutput = `<h2>Investment Growth</h2><table><tr><th>Year</th><th>Value</th></tr>`;
-    for (let year = 1; year <= termYears; year++) {
-        currentInvestment *= 1 + rateOfReturn / 100;
-        investmentOutput += `<tr><td>${year}</td><td>$${currentInvestment.toLocaleString('en-US', {maximumFractionDigits: 2})}</td></tr>`;
-    }
-    investmentOutput += `</table>`;
-
-    let taxOutput = `<h2>Tax Benefits</h2>`;
-    taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-
-    const netInvestmentValue = currentInvestment - amountFinanced;
-    const netCostOfFinancing = totalCostOfFinance - taxSavings;
-    const benefitOfFinancing = netInvestmentValue - netCostOfFinancing;
-
-    let comparisonOutput = `<h2>Comparison of Financing vs. Paying Cash</h2>`;
-    comparisonOutput += `<p>Net Benefit of Investing the Cash: $${netInvestmentValue.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-    comparisonOutput += `<p>Net Cost of Financing after Tax Savings: $${netCostOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-    comparisonOutput += `<p>Overall Financial Benefit of Financing: $${benefitOfFinancing.toLocaleString('en-US', {maximumFractionDigits: 2})}</p>`;
-    comparisonOutput += benefitOfFinancing > 0 ? `<p>It is financially beneficial to finance the RV.</p>` : `<p>It is financially beneficial to pay cash.</p>`;
-
-    document.getElementById('financeDetails').innerHTML = financeOutput;
-    document.getElementById('investmentResults').innerHTML = investmentOutput;
-    document.getElementById('taxBenefits').innerHTML = taxOutput;
-    document.getElementById('comparisonResults').innerHTML = comparisonOutput;
 }
 
-function printResults() {
-    window.print();
+function calculate() {
+    const amountFinanced = parseFloat(document.getElementById('amountFinanced').value.replace(/[^\d.-]/g, ''));
+    const apr = parseFloat(document.getElementById('apr').value.replace(/[^\d.-]/g, ''));
+    const termYears = parseInt(document.getElementById('termYears').value);
+    const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value.replace(/[^\d.-]/g, ''));
+    const annualIncome = parseFloat(document.getElementById('annualIncome').value.replace(/[^\d.-]/g, ''));
+
+    updateTaxBracket(annualIncome);
+
+    if (document.getElementById('includeTaxes').checked) {
+        // Perform calculations considering taxes
+        updateCalculationsWithTaxes(amountFinanced, apr, termYears);
+    } else {
+        // Perform standard calculations
+        updateStandardCalculations(amountFinanced, apr, termYears);
+    }
+}
+
+function updateTaxBracket(annualIncome) {
+    let bracket;
+    // Define tax brackets here
+    if (annualIncome <= 9875) {
+        bracket = '10%';
+    } else if (annualIncome <= 40125) {
+        bracket = '12%';
+    } else if (annualIncome <= 85525) {
+        bracket = '22%';
+    } else if (annualIncome <= 163300) {
+        bracket = '24%';
+    } else if (annualIncome <= 207350) {
+        bracket = '32%';
+    } else if (annualIncome <= 518400) {
+        bracket = '35%';
+    } else {
+        bracket = '37%';
+    }
+    document.getElementById('taxBenefits').innerText = 'Tax Bracket: ' + bracket;
+}
+
+function updateStandardCalculations(amountFinanced, apr, termYears) {
+    const monthlyPayment = (amountFinanced * apr / 100 / 12) / (1 - Math.pow(1 + apr / 100 / 12, -termYears * 12));
+    document.getElementById('financeDetails').innerText = 'Monthly Payment: $' + monthlyPayment.toFixed(2);
+}
+
+function updateCalculationsWithTaxes(amountFinanced, apr, termYears) {
+    // Placeholder for tax-inclusive calculation logic
+    const monthlyPaymentWithTaxes = (amountFinanced * apr / 100 / 12) / (1 - Math.pow(1 + apr / 100 / 12, -termYears * 12)); // Simplified example
+    document.getElementById('financeDetails').innerText = 'Monthly Payment (with taxes): $' + monthlyPaymentWithTaxes.toFixed(2);
 }
