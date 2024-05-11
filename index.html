@@ -22,8 +22,10 @@
       <input type="number" id="rateOfReturn" placeholder="Enter rate of return">
       <label for="annualIncome">Annual Income ($):</label>
       <input type="number" id="annualIncome" placeholder="Enter annual income">
+      <label for="includeTaxes">Include Taxes:</label>
+      <input type="checkbox" id="includeTaxes" onchange="toggleTaxes()">
       <button onclick="calculate()">Calculate</button>
-      </div>
+    </div>
     <div class="results">
       <div id="financeOutput" class="result-section"></div>
       <div id="taxOutput" class="result-section"></div>
