@@ -28,18 +28,21 @@
             <button id="calculateButton">Calculate</button>
             <button onclick="printResults()">Print Results</button>
         </div>
-        <div class="results">
-            <div id="financeDetails" class="result-section"></div>
-            <div id="taxBenefits" class="result-section"></div>
-            <div id="investmentResults" class="result-section"></div>
-            <div id="comparisonResults" class="result-section"></div>
+        <div id="resultsTable">
+            <h2>SHOULD YOU PAY CASH OR FINANCE YOUR RV PURCHASE?</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Investment Growth</th>
+                        <th>Interest Paid</th>
+                        <th>Ending Balance</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody"></tbody>
+            </table>
+            <p id="summaryAdvice"></p>
         </div>
-        <div class="directions">
-            <h2>Directions:</h2>
-            <p>Fill in the fields with the appropriate values for amount financed, APR, term, rate of return, and annual income. Then click the "Calculate" button to see the results. You can also click the "Print Results" button to print your results.</p>
-        </div>
-        <canvas id="myChart" width="400" height="400"></canvas>
-        <p id="advice"></p>
         <p id="disclaimer">Disclaimer: This calculator is provided for informational and educational purposes only, based on simplified assumptions and typical cases. It is not intended as financial or tax advice. The accuracy of the calculations and the applicability to your circumstances are not guaranteed. Please consult a financial professional or tax advisor for personal advice before making significant financial decisions.</p>
     </div>
     <script src="script.js"></script>
