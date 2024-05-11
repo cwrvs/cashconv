@@ -38,8 +38,6 @@ input[type="number"], button {
 /* Bold labels */
 .bold-label {
     font-weight: bold;
-    border: none; /* Remove border if there was any */
-    background: none; /* Remove any background */
 }
 
 /* Button specific styling */
@@ -54,9 +52,6 @@ button:hover {
     background-color: #0062cc;
 }
 
-/* Results section layout */
-.results {
-    display
 /* Results section layout */
 .results {
     display: flex;
@@ -83,22 +78,4 @@ button:hover {
     .results {
         flex-wrap: nowrap;
     }
-}
-
-/* Additional details */
-#disclaimer, .tax-rate {
-    font-size: 14px;
-    color: #777;
-}
-
-.tax-rate {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Checkbox styling */
-.checkbox-section {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
 }
