@@ -1,16 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Attach event listeners for input formatting and calculation triggers
-    document.getElementById('amountFinanced').addEventListener('blur', formatInput);
-    document.getElementById('apr').addEventListener('blur', formatInput);
-    document.getElementById('termYears').addEventListener('blur', formatInput);
-    document.getElementById('rateOfReturn').addEventListener('blur', formatInput);
-    document.getElementById('annualIncome').addEventListener('blur', formatInput);
-    document.getElementById('includeTaxes').addEventListener('change', calculate);
-
-    // Event listeners for instant calculation on input changes
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.addEventListener('input', calculate);
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function(event) {
+            // Only clear the format if the value is fully numeric
+            let value = event.target.value;
+            if (value.match(/^\d+(\.\d+)?$/)) { // Check if the value is purely numeric
+                event.target.value = value;
+            } else {
+                event.target.value = value.replace(/[\$, %]+/g, '').trim(); // Remove any formatting
+            }
+        });
+        input.addEventListener('blur', formatInput); // Re-apply formatting on blur
     });
+
+    document.getElementById('includeTaxes').addEventListener('change', calculate);
 });
 
 function formatInput(event) {
@@ -26,14 +29,12 @@ function formatInput(event) {
 }
 
 function calculate() {
-    // Retrieve and sanitize input values
     const amountFinanced = parseFloat(document.getElementById('amountFinanced').value.replace(/[^\d.-]/g, ''));
     const apr = parseFloat(document.getElementById('apr').value.replace(/[^\d.-]/g, ''));
     const termYears = parseInt(document.getElementById('termYears').value);
     const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value.replace(/[^\d.-]/g, ''));
     const annualIncome = parseFloat(document.getElementById('annualIncome').value.replace(/[^\d.-]/g, ''));
 
-    // Update tax benefits based on income
     updateTaxBracket(annualIncome);
 
     if (document.getElementById('includeTaxes').checked) {
@@ -64,7 +65,6 @@ function updateTaxBracket(annualIncome) {
 }
 
 function updateStandardCalculations(amountFinanced, apr, termYears) {
-    // Placeholder for your specific financial calculations
     const monthlyPayment = (amountFinanced * (apr / 100) / 12) / (1 - Math.pow(1 + (apr / 100) / 12, -termYears * 12));
     document.getElementById('financeDetails').innerText = 'Monthly Payment: $' + monthlyPayment.toFixed(2);
 }
@@ -72,6 +72,11 @@ function updateStandardCalculations(amountFinanced, apr, termYears) {
 function updateCalculationsWithTaxes(amountFinanced, apr, termYears, annualIncome) {
     // Example calculation considering tax effects
     const monthlyPaymentWithTaxes = (amountFinanced * (apr / 100) / 12) / (1 - Math.pow(1 + (apr / 100) / 12, -termYears * 12)); // Simplified example
-    document.getElementById('financeDetails').innerText = 'Monthly Payment (with taxes): $' + monthlyPaymentWithTaxes.toFixed(2);
-    // Additional logic to calculate tax effects can be added here
+    document.getElementById('financeDetails').innerText = 'Monthly
+Payment (with taxes): $' + monthlyPaymentWithTaxes.toFixed(2);
+// Additional logic to calculate tax effects can be added here
+}
+
+function printResults() {
+window.print();
 }
