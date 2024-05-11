@@ -4,6 +4,7 @@ function calculate() {
   const termYears = parseInt(document.getElementById('termYears').value);
   const rateOfReturn = parseFloat(document.getElementById('rateOfReturn').value);
   const annualIncome = parseFloat(document.getElementById('annualIncome').value);
+  const includeTaxes = document.getElementById('includeTaxes').checked;
 
   if (isNaN(amountFinanced) || isNaN(apr) || isNaN(termYears) || isNaN(rateOfReturn) || isNaN(annualIncome)) {
     alert("Please fill all fields with valid numbers.");
@@ -25,26 +26,31 @@ function calculate() {
   // Calculate total interest paid (total cost - amount financed)
   const totalInterestPaid = totalCostOfFinance - amountFinanced;
 
-  // Calculate estimated tax rate based on annual income
-  let taxRate;
-  if (annualIncome <= 9875) {
-    taxRate = 0.10;
-  } else if (annualIncome <= 40125) {
-    taxRate = 0.12;
-  } else if (annualIncome <= 85525) {
-    taxRate = 0.22;
-  } else if (annualIncome <= 163300) {
-    taxRate = 0.24;
-  } else if (annualIncome <= 207350) {
-    taxRate = 0.32;
-  } else if (annualIncome <= 518400) {
-    taxRate = 0.35;
-  } else {
-    taxRate = 0.37;
-  }
+  let taxSavings = 0;
+  let effectiveTaxRate = 0;
+  if (includeTaxes) {
+    // Calculate estimated tax rate based on annual income
+    let taxRate;
+    if (annualIncome <= 9875) {
+      taxRate = 0.10;
+    } else if (annualIncome <= 40125) {
+      taxRate = 0.12;
+    } else if (annualIncome <= 85525) {
+      taxRate = 0.22;
+    } else if (annualIncome <= 163300) {
+      taxRate = 0.24;
+    } else if (annualIncome <= 207350) {
+      taxRate = 0.32;
+    } else if (annualIncome <= 518400) {
+      taxRate = 0.35;
+    } else {
+      taxRate = 0.37;
+    }
 
-  // Calculate tax savings from interest deduction (tax rate * total interest)
-  const taxSavings = totalInterestPaid * taxRate;
+    // Calculate tax savings from interest deduction (tax rate * total interest)
+    taxSavings = totalInterestPaid * taxRate;
+    effectiveTaxRate = taxRate * 100; // Convert tax rate to percentage
+  }
 
   // **Results Section with Math**
 
@@ -66,8 +72,14 @@ function calculate() {
   investmentOutput += `</table>`;
 
   let taxOutput = `<h2>Tax Benefits</h2>`;
-  taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;  // Tax Savings
+  if (includeTaxes) {
+    taxOutput += `<p>Effective Tax Rate: ${effectiveTaxRate.toFixed(2)}%</p>`; // Display effective tax rate
+    taxOutput += `<p>Estimated Tax Savings from Interest Deduction: $${taxSavings.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>`;  // Tax Savings
+  } else {
+    taxOutput += `<p>Tax savings not included in calculations.</p>`;
+  }
 
+  // Net
   // Net Investment Value = Investment Growth (Final Year) - Amount Financed
   const netInvestmentValue = currentInvestment - amountFinanced;
 
@@ -84,4 +96,9 @@ function calculate() {
   document.getElementById('investmentOutput').innerHTML = investmentOutput;
   document.getElementById('taxOutput').innerHTML = taxOutput;
   document.getElementById('comparisonOutput').innerHTML = comparisonOutput;
+}
+
+function toggleTaxes() {
+  // Function to toggle tax calculations based on checkbox state
+  calculate();
 }
