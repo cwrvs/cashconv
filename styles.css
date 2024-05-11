@@ -1,52 +1,43 @@
 body {
   font-family: sans-serif; /* Use a generic sans-serif font */
+  font-family: sans-serif;
   background-color: #f4f4f4;
   margin: 0;
   padding: 20px;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
+@@ -11,7 +11,7 @@ body {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .calculator,
-.directions {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 4px;
-  margin-bottom: 20px;
-}
-
-.calculator label,
-.calculator input,
+@@ -27,12 +27,12 @@ body {
 .calculator button {
   display: block;
   width: 100%;
+  margin-bottom: 10px; /* Adjust spacing for better flow */
   margin-bottom: 10px;
 }
 
 input[type="number"],
 button {
+  padding: 12px 16px; /* Increase padding for better touch target area */
   padding: 12px 16px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
-
-button {
+@@ -41,7 +41,7 @@ button {
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out; /* Add smooth hover effect */
   transition: background-color 0.2s ease-in-out;
 }
 
 button:hover {
-  background-color: #0062cc;
-}
+@@ -50,35 +50,3 @@ button:hover {
 
 .results {
   display: flex;
@@ -70,28 +61,6 @@ button:hover {
 
   .results {
     flex-wrap: nowrap;
-  }
-}
-
-@media print {
-  body, .container {
-    background: none;
-    box-shadow: none;
-    color: #000;
-  }
-
-  .container {
-    width: 100%;
-    border: none;
-  }
-
-  .calculator, .directions, header, .tax-section, button {
-    display: none;
-  }
-
-  .result-section {
-    flex-basis: 100%;
-    margin-bottom: 0;
   }
 }
 
