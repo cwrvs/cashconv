@@ -39,9 +39,7 @@ input[type="number"], button {
 .bold-label {
     font-weight: bold;
     border: none; /* Remove border if there was any */
-    background: none; /*
-    background: none; /* Remove background styling */
-    padding-left: 0; /* Remove padding on the left if needed */
+    background: none; /* Remove any background */
 }
 
 /* Button specific styling */
@@ -91,7 +89,7 @@ button:hover {
 }
 
 .tax-rate {
-    font-weight: bold;
+    font-weight:bold;
     margin-top: 10px;
 }
 
